@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <title></title>
+  <script src="jquery.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <style>
+    .card-header {
+      background-color: transparent;
+      border: 0;
+    }
+
+    .col-12:not(.form-group) {
+      padding: 0;
+    }
+
+    body {
+      background-color: rgb(35, 10, 33);
+      color: white;
+    }
+
+    .card {
+      background-color: rgb(35, 10, 33);
+      border-bottom: 1px solid rgb(37, 150, 190);
+    }
+
+    .btn-link {
+      color: rgb(37, 150, 190);
+      text-decoration: none;
+      font-size: 15pt;
+      font-weight: bold;
+    }
+
+    .btn-link:active,
+    .btn-link:hover {
+      color: rgb(37, 150, 190);
+      text-decoration: none;
+    }
+
+    .custom-control-input:checked~.custom-control-label::before {
+      color: #fff;
+      border-color: #0081fa96;
+      background-color: #000000;
+    }
+
+    .btn:focus,
+    .btn:active {
+      outline: none !important;
+      box-shadow: none;
+    }
+  </style>
+  <div class="container" style="min-width:400px; ">
+    <div class="row">
+      <div class="col-12">
+        <div class="header w-100">
+          <img src="header.png" height="100" style="object-fit:cover; width:100%;" />
+        </div>
+        <div id="accordion">
+
+          <div class="card">
+            <div class="card-header" id="headingSettings">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSettings"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Common Settings
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="jsonrpc">JSON RPC 1</label>
+                  <input type="text" class="form-control" name="jsonrpc" id="jsonrpc"/>
+                  <label for="jsonrpc2">JSON RPC 2 (optional)</label>
+                  <input type="text" class="form-control" name="jsonrpc2" id="jsonrpc2"/>
+                  <label for="privatekey">Wallet private key</label>
+                  <input type="text" class="form-control" name="walletprivatekey" id="walletprivatekey" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- <div class="card">
+            <div class="card-header" id="headingSolanaAutomation">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSolanaAutomation"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Candy Machine
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSolanaAutomation" class="collapse" aria-labelledby="headingSolanaAutomation" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="candymachineid">Candy machine ID:</label>
+                  <input type="text" class="form-control" name="candymachineid" id="candymachineid" />
+
+                  <div class="d-flex justify-content-between align-items-center">
+                  <a class="btn mt-1 w-90" style="color: black;
+                  background-color: rgb(1, 254, 183);
+                  border-color: rgb(1, 254, 183);" id="solanaStartAutomation">Launch task</a>
+                  <i class="fas fa-sync-alt resfreshWindow" style="color:rgb(1, 254, 183);"></i>
+                </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="card">
+            <div class="card-header" id="headingSolanaAutomationv2">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSolanaAutomationv2"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Candy Machine V2
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSolanaAutomationv2" class="collapse" aria-labelledby="headingSolanaAutomationv2" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="candymachineidv2">Candy machine ID:</label>
+                  <input type="text" class="form-control" name="candymachineidv2" id="candymachineidv2" />
+                  <label for="candymachinev2tasks">Number of Tasks:</label>
+                  <input type="number" class="form-control" name="candymachinev2tasks" id="candymachinev2tasks" />
+                  <p>If 2 json rpcs are provided, will launch this Number of Tasks:s per json rpc.</p>
+                  <div class="custom-control custom-switch mt-2">
+                    <input type="checkbox" class="custom-control-input" name="streakModeCandyV2" id="streakModeCandyV2">
+                    <label class="custom-control-label" for="streakModeCandyV2">Streak mode</label>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                  <a class="btn mt-1 w-90" style="color: black;
+                  background-color: rgb(37, 150, 190);
+                  border-color: rgb(37, 150, 190);" id="solanaStartAutomationv2">Launch tasks</a>
+                  <i class="fas fa-sync-alt resfreshWindow" style="color:rgb(37, 150, 190);"></i>
+                </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="card">
+            <div class="card-header" id="headingSolana">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSolana"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Manual mode (click tabs)
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSolana" class="collapse" aria-labelledby="headingSolana" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="solanatabs">Number of tabs:</label>
+                  <input type="number" class="form-control" value="20" name="solanatabs" id="solanatabs" />
+                  <a class="btn mt-1" style="color: black;
+                  background-color: rgb(1, 254, 183);
+                  border-color: rgb(1, 254, 183);" id="solanaStart">Run!</a>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+
+          <!-- <div class="card">
+            <div class="card-header" id="headingQTsolana">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseQTsolana"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Quicktask link SOL
+                </button>
+                <div class="custom-control custom-switch mt-2">
+                  <input type="checkbox" class="custom-control-input" name="QTsolana" id="QTsolana">
+                  <label class="custom-control-label" for="QTsolana"></label>
+                </div>
+              </h5>
+            </div>
+            <div id="collapseQTsolana" class="collapse" aria-labelledby="headingQTsolana" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="solanaQTTasks">Number of Tasks:</label>
+                  <input type="number" class="form-control" name="solanaQTTasks" id="solanaQTTasks" />
+                </div>
+                <div class="d-flex flex-row mt-2">
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" name="quicktaskSafeMode" id="quicktaskSafeMode">
+                    <label class="custom-control-label" for="quicktaskSafeMode">Safe mode (you must click MINT button)</label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div> -->
+
+
+          <div class="card">
+            <div class="card-header" id="headingQTsolanav2">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseQTsolanav2"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Quicktask link SOL V2
+                </button>
+                <div class="custom-control custom-switch mt-2">
+                  <input type="checkbox" class="custom-control-input" name="QTsolanav2" id="QTsolanav2">
+                  <label class="custom-control-label" for="QTsolanav2"></label>
+                </div>
+              </h5>
+            </div>
+            <div id="collapseQTsolanav2" class="collapse" aria-labelledby="headingQTsolanav2" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="solanaQTTasksv2">Number of Tasks:</label>
+                  <input type="number" class="form-control" name="solanaQTTasksv2" id="solanaQTTasksv2" />
+                  <p>If 2 json rpcs are provided, will launch this Number of Tasks:s per json rpc.</p>
+                </div>
+                <div class="d-flex flex-row mt-2">
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" name="quicktaskSafeModev2" id="quicktaskSafeModev2">
+                    <label class="custom-control-label" for="quicktaskSafeModev2">Safe mode (you must click MINT button)</label>
+                  </div>
+                </div>
+                <!-- <div class="d-flex flex-row mt-2">
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" name="quicktaskSafeModev2captcha" id="quicktaskSafeModev2captcha">
+                    <label class="custom-control-label" for="quicktaskSafeModev2captcha">Captcha</label>
+                  </div>
+                </div> -->
+
+              </div>
+            </div>
+          </div>
+
+         
+
+          <div class="card">
+            <div class="card-header" id="headingMELaunchpad">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseMELaunchpad"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  MagicEden launchpad
+                </button>
+              </h5>
+            </div>
+            <div id="collapseMELaunchpad" class="collapse" aria-labelledby="headingMELaunchpad" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  
+                  <label for="magicedenlaunchpadcandy">Candy ID:</label>
+                  <input type="text" class="form-control" name="magicedenlaunchpadcandy" id="magicedenlaunchpadcandy" />
+
+                  <label for="magicedenlaunchpadtasks">Tasks:</label>
+                  <input type="text" class="form-control" name="magicedenlaunchpadtasks" id="magicedenlaunchpadtasks" />
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a class="btn mt-1" style="color: black;
+                                    background-color: rgb(37, 150, 190);
+                                    border-color: rgb(37, 150, 190);" id="magicEdenLaunchpadStart">Run!</a>
+                    <i class="fas fa-sync-alt resfreshWindow" style="color:rgb(37, 150, 190);"></i>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header" id="headingME">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseME"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  MagicEden sniping
+                </button>
+              </h5>
+            </div>
+            <div id="collapseME" class="collapse" aria-labelledby="headingME" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="magicedencollection">Collection name:</label>
+                  <input type="text" class="form-control" name="magicedencollection" id="magicedencollection" />
+                  <label for="magicedenmaxprice">Max Price (SOL):</label>
+                  <input type="text" class="form-control" name="magicedenmaxprice" id="magicedenmaxprice" />
+                  <label for="magicedendelay">Delay (milliseconds):</label>
+                  <input type="text" class="form-control" name="magicedendelay" id="magicedendelay" />
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a class="btn mt-1" style="color: black;
+                                    background-color: rgb(37, 150, 190);
+                                    border-color: rgb(37, 150, 190);" id="magicEdenStart">Run!</a>
+                    <i class="fas fa-sync-alt resfreshWindow" style="color:rgb(37, 150, 190);"></i>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="headingMEMoonRank">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseMEMoonRank"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  MagicEden-MoonRank
+                </button>
+              </h5>
+            </div>
+            <div id="collapseMEMoonRank" class="collapse" aria-labelledby="headingMEMoonRank" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="magicedencollection">Magic Eden Collection name:</label>
+                  <input type="text" class="form-control" name="magicedenmoonrankcollection" id="magicedenmoonrankcollection" />
+                  <label for="moonrankcollection">MoonRank Collection name:</label>
+                  <input type="text" class="form-control" name="moonrankcollection" id="moonrankcollection" />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+          <!-- <div class="card">
+            <div class="card-header" id="headingOpensea">
+              <h5 class="mb-0 d-flex justify-content-between">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOpensea"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Opensea sniping
+                </button>
+                <div class="custom-control custom-switch mt-2">
+                  <input type="checkbox" class="custom-control-input" name="opensea" id="opensea">
+                  <label class="custom-control-label" for="opensea"></label>
+                </div>
+              </h5>
+            </div>
+            <div id="collapseOpensea" class="collapse" aria-labelledby="headingOpensea" data-parent="#accordion">
+              <div class="card-body">
+                <div class="d-flex flex-column mt-2">
+                  <label for="openseacollection">Collection URL:</label>
+                  <input type="text" class="form-control" name="openseacollection" id="openseacollection" />
+                  <label for="openseaprice">Max prixe (ex: 0.02):</label>
+                  <input type="text" class="form-control" name="openseaprice" id="openseaprice" />
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript" src="popup.bundle.js"></script></body>
+
+</html>
